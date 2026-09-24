@@ -1,3 +1,8 @@
+import socket
+
+PORT = 5001
+
+
 def vigenere_encrypt(plaintext, key):
     ciphertext = ""
     key_index = 0
@@ -10,10 +15,10 @@ def vigenere_encrypt(plaintext, key):
             # Convert plaintext letter to number 0-25
             p = ord(char.upper()) - ord('A')
 
-            # Select the corresponding key letter
+            # Select corresponding key character
             key_char = key[key_index % len(key)]
 
-            # Convert key letter to number 0-25
+            # Convert key character to number 0-25
             k = ord(key_char) - ord('A')
 
             # Vigenere encryption formula
@@ -22,7 +27,7 @@ def vigenere_encrypt(plaintext, key):
             # Convert encrypted value back to a letter
             ciphertext += chr(c + ord('A'))
 
-            # Move to the next key character
+            # Move to next key character
             key_index += 1
 
         else:
@@ -33,6 +38,8 @@ def vigenere_encrypt(plaintext, key):
 
 
 def main():
+    print("=== Vigenere Sender ===\n")
+
     message = input(
         'Enter the message "TO BE OR NOT TO BE THAT IS THE QUESTION": '
     )
@@ -41,12 +48,36 @@ def main():
         'Enter the Vigenere key "RELATIONS": '
     )
 
-    encrypted_message = vigenere_encrypt(message, key)
+    receiver_ip = input(
+        "Enter VM2 Receiver IP address: "
+    )
+
+    ciphertext = vigenere_encrypt(message, key)
 
     print("\n--- Vigenere Encryption ---")
     print("Original Message :", message)
     print("Encryption Key   :", key)
-    print("Encrypted Message:", encrypted_message)
+    print("Encrypted Message:", ciphertext)
+
+    print(f"\nConnecting to {receiver_ip}:{PORT}...")
+
+    try:
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+
+            # Connect to VM2
+            sock.connect((receiver_ip, PORT))
+
+            # Send encrypted message
+            sock.sendall(ciphertext.encode("utf-8"))
+
+            print("Ciphertext successfully sent to VM2.")
+
+    except ConnectionRefusedError:
+        print("\nConnection refused.")
+        print("Make sure vigenere_receiver.py is running on VM2.")
+
+    except OSError as error:
+        print(f"\nNetwork error: {error}")
 
 
 if __name__ == "__main__":

@@ -1,1 +1,6 @@
-curl -s -u admin:admin -H "Accept: application/yang-data+json" "http://127.0.0.1:8181/rests/data/opendaylight-inventory:nodes/node=openflow%3A1/flow-node-inventory:table=0?content=nonconfig" | python3 -c 'import json,sys; d=json.load(sys.stdin)["flow-node-inventory:table"][0]; print("Table:",d["id"]); print("Statistics:",d.get("opendaylight-flow-table-statistics:flow-table-statistics",{})); [(print("Flow:",f["id"],"| Input:",f["match"]["in-port"],"| Output:",f["instructions"]["instruction"][0]["apply-actions"]["action"][0]["output-action"]["output-node-connector"],"| Packets:",f.get("opendaylight-flow-statistics:flow-statistics",{}).get("packet-count","N/A"))) for f in d.get("flow",[])]'
+{
+  lsb_release -d
+  java -version 2>&1
+  mn --version
+  ovs-vsctl --version | head -n 1
+} | tee ~/SDN-Project/Evidence/system-versions.txt

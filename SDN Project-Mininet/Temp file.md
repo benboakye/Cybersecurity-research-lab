@@ -1,3 +1,6 @@
+curl -i -u admin:admin -X PUT -H "Content-Type: application/yang-data+json" --data-binary @flow101.json "http://127.0.0.1:8181/rests/data/opendaylight-inventory:nodes/node=openflow%3A1/table=0/flow=101"
+
+
 cat > flow101.json <<'EOF'
 {
   "flow": [

@@ -1,1 +1,1 @@
-curl -i -u admin:admin -X PUT -H "Content-Type: application/yang-data+json" --data-binary @flow101.json "http://127.0.0.1:8181/rests/data/opendaylight-inventory:nodes/node=openflow%3A1/flow-node-inventory:table=0/flow=101"
+python3 -c 'import json; d=json.load(open("flow101.json")); f=d["flow"][0]; f["id"]="102"; f["flow-name"]="h2-to-h1"; f["match"]["in-port"]="2"; f["instructions"]["instruction"][0]["apply-actions"]["action"][0]["output-action"]["output-node-connector"]="1"; json.dump(d,open("flow102.json","w"),indent=2)'

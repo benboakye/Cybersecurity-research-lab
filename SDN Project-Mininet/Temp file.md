@@ -1,1 +1,1 @@
-mkdir -p ~/docuseal-migration && cd ~/docuseal-migration
+python3 -m venv .venv && source .venv/bin/activate

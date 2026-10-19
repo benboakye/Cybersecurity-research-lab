@@ -3,18 +3,19 @@ import os
 from cryptography.exceptions import InvalidTag
 from crypto_common import derive_aes_key, seal_document, open_document
 
-document = b"Loan Amount: $10,000"
-key = derive_aes_key(os.urandom(32))
+document = b"Confidential Loan Agreement"
 
-envelope = seal_document(document, key)
-print("Original decrypts:", open_document(envelope, key) == document)
+correct_key = derive_aes_key(os.urandom(32))
+wrong_key = derive_aes_key(os.urandom(32))
 
-tampered = bytearray(envelope)
-tampered[16] ^= 1  # Modify one ciphertext bit
+envelope = seal_document(document, correct_key)
+
+print("Correct key decrypts:",
+      open_document(envelope, correct_key) == document)
 
 try:
-    open_document(bytes(tampered), key)
-    print("Tampered ciphertext: ACCEPTED")
+    open_document(envelope, wrong_key)
+    print("Wrong key: ACCEPTED")
 except InvalidTag:
-    print("Tampered ciphertext: REJECTED")
+    print("Wrong key: REJECTED")
 PY

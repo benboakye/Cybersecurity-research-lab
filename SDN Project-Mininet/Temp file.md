@@ -1,1 +1,1 @@
-python improved_app/crypto_inventory_scanner.py sample_data --source-dir improved_app/test_fixtures
+cp improved_app/crypto_inventory_scanner.py improved_app/crypto_inventory_scanner_before_ast.py.bak

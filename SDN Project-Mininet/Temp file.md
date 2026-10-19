@@ -1,1 +1,1 @@
-cp improved_app/crypto_inventory_scanner.py improved_app/crypto_inventory_scanner.py.bak
+nano improved_app/crypto_inventory_scanner.py

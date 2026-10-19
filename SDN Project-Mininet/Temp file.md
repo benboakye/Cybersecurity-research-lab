@@ -1,1 +1,1 @@
-python3 -m zipfile -e ~/Downloads/Sample_docuseal-migration-solution.zip ~/docuseal-migration
+ls -l legacy_app/docuseal_classical.py crypto_common.py requirements.txt

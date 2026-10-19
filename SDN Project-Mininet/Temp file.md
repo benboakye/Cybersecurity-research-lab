@@ -1,6 +1,2 @@
-{
-  lsb_release -d
-  java -version 2>&1
-  mn --version
-  ovs-vsctl --version | head -n 1
-} | tee ~/SDN-Project/Evidence/system-versions.txt
+sudo apt install -y build-essential cmake git ninja-build \
+python3 python3-venv python3-pip openssl libssl-dev

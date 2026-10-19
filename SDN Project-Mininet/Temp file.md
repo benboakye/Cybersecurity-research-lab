@@ -1,1 +1,1 @@
-nano improved_app/crypto_inventory_scanner.py
+(re.compile(r"rsa\.generate_private_key|padding\.OAEP|padding\.PSS"), "RSA (code reference)"),

@@ -1,6 +1,3 @@
-cp sample_output/benchmark_results.csv sample_output/classical_baseline_ubuntu_n10.csv
+python -m pip install liboqs-python
 
-
-bash sample_data/generate_sample_keys.sh
-
-python legacy_app/crypto_inventory_scanner.py sample_data --source-dir legacy_app
+python -c "import oqs; print('KEM:', oqs.get_enabled_kem_mechanisms()); print('Signatures:', oqs.get_enabled_sig_mechanisms())"

@@ -1,1 +1,1 @@
-(re.compile(r"rsa\.generate_private_key|padding\.OAEP|padding\.PSS"), "RSA (code reference)"),
+python improved_app/crypto_inventory_scanner.py sample_data --source-dir legacy_app

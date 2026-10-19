@@ -1,3 +1,3 @@
-cp sample_output/benchmark_results.csv sample_output/classical_vs_pqc_ubuntu_n50.csv
+lscpu | grep -E '^(CPU\(s\)|Model name|Hypervisor vendor):'
 
-lscpu | grep -E 'Model name|CPU\(s\)|Hypervisor vendor'
+python -m pip freeze > sample_output/environment_packages_n50.txt

@@ -1,3 +1,1 @@
-python -m pip install liboqs-python
-
-python -c "import oqs; print('KEM:', oqs.get_enabled_kem_mechanisms()); print('Signatures:', oqs.get_enabled_sig_mechanisms())"
+python -c "import oqs; print('ML-KEM-768:', 'ML-KEM-768' in oqs.get_enabled_kem_mechanisms()); print('ML-DSA-65:', 'ML-DSA-65' in oqs.get_enabled_sig_mechanisms())"

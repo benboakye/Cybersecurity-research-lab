@@ -1,1 +1,1 @@
-ls -l legacy_app/docuseal_classical.py crypto_common.py requirements.txt
+python -m pip install --only-binary=:all: cryptography

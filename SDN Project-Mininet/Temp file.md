@@ -1,20 +1,21 @@
 python - <<'PY'
-from pqc_app.docuseal_pqc import (
-    generate_signing_keypair,
-    sign_document,
-    verify_document
-)
+import os
+from cryptography.exceptions import InvalidTag
+from crypto_common import derive_aes_key, seal_document, open_document
 
-signer, public_key = generate_signing_keypair()
+document = b"Loan Amount: $10,000"
+aes_key = derive_aes_key(os.urandom(32))
 
-original = b"Loan Amount: $10,000"
-tampered = b"Loan Amount: $90,000"
+envelope = seal_document(document, aes_key)
+print("Original decrypts:",
+      open_document(envelope, aes_key) == document)
 
-signature = sign_document(signer, original)
+tampered = bytearray(envelope)
+tampered[-1] ^= 1
 
-print("Algorithm: ML-DSA-65")
-print("Original document valid:",
-      verify_document(public_key, original, signature))
-print("Tampered document valid:",
-      verify_document(public_key, tampered, signature))
+try:
+    open_document(bytes(tampered), aes_key)
+    print("Tampered ciphertext: ACCEPTED")
+except InvalidTag:
+    print("Tampered ciphertext: REJECTED")
 PY

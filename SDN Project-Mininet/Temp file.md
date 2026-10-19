@@ -1,1 +1,1 @@
-python -c "import cryptography; print(cryptography.__version__)"
+python benchmark/benchmark_suite.py --iterations 10

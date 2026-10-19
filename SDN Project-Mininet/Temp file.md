@@ -1,1 +1,1 @@
-python3 -m venv .venv && source .venv/bin/activate
+python3 -m zipfile -e ~/Downloads/Sample_docuseal-migration-solution.zip ~/docuseal-migration
